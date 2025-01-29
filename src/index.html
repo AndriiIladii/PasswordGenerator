@@ -3,8 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <title>Password Generator</title>
   </head>
-  <body></body>
+  <body>
+    <div class="generator__container">
+      <div class="generator__row">
+        <h1 class="generator__title">
+          Password<br />
+          Generator
+        </h1>
+        <div class="generator__wrapper">
+          <div class="display__row">
+            <div class="generator__display">
+              <input
+                type
+                text
+                id="password"
+                readonly
+                value="1a4Txe3m*%Qm^vdXs!"
+              />
+              <div class="generator__display-btns">
+                <div class="generator__difficulty">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <button type="button" class="reset__btn">
+                  <img src="images/reset.svg" alt="Reset" />
+                </button>
+              </div>
+            </div>
+            <div class="display__btn">
+              <button type="button" class="copy__btn">
+                Copy Password_
+                <span><img src="images/arrow-right.svg" alt="arrow" /></span>
+              </button>
+            </div>
+            <div class="generator__password-length">
+              <span class="password__length-value"></span>
+              <input
+                type="range"
+                id="password-length"
+                min="4"
+                max="32"
+                value="4"
+              />
+            </div>
+
+            <div class="generator__options">
+              <label>
+                <input type="checkbox" id="uppercase" checked />
+                <span></span>
+                <span class="option__name">Uppercase letters</span>
+              </label>
+              <label>
+                <input type="checkbox" id="lowercase" checked />
+                <span></span>
+                <span class="option__name">Lowercase letters</span>
+              </label>
+              <label>
+                <input type="checkbox" id="numbers" checked />
+                <span></span>
+                <span class="option__name">Numbers</span>
+              </label>
+              <label>
+                <input type="checkbox" id="symbols" checked />
+                <span></span>
+                <span class="option__name">Symbols</span>
+              </label>
+            </div>
+          </div>
+          <div class="generator__history">
+            <h2>Password history</h2>
+            <div class="generator__history-body"></div>
+            <div class="generator__history-btn">
+              <button type="button">Clear history</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
 </html>
