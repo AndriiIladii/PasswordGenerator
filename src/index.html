@@ -36,56 +36,62 @@
                   <span></span>
                   <span></span>
                 </div>
-                <button type="button" class="reset__btn">
-                  <img src="images/reset.svg" alt="Reset" />
+                <button type="button" class="copy__btn">
+                  <img src="images/copy.svg" alt="Copy" />
                 </button>
               </div>
             </div>
-            <div class="display__btn">
-              <button type="button" class="copy__btn">
-                Copy Password_
-                <span><img src="images/arrow-right.svg" alt="arrow" /></span>
-              </button>
-            </div>
-            <div class="generator__password-length">
-              <span class="password__length-value"></span>
-              <input
-                type="range"
-                id="password-length"
-                min="4"
-                max="32"
-                value="4"
-              />
-            </div>
+            <div class="display">
+              <div class="display__btn">
+                <button type="button" class="generate__btn">
+                  Generate Password_
+                  <span><img src="images/arrow-right.svg" alt="arrow" /></span>
+                </button>
+              </div>
+              <div class="generator__length-slider">
+                <span class="password__slider-value"></span>
+                <input
+                  type="range"
+                  id="length__slider"
+                  min="4"
+                  max="32"
+                  value="4"
+                />
+              </div>
 
-            <div class="generator__options">
-              <label>
-                <input type="checkbox" id="uppercase" checked />
-                <span></span>
-                <span class="option__name">Uppercase letters</span>
-              </label>
-              <label>
-                <input type="checkbox" id="lowercase" checked />
-                <span></span>
-                <span class="option__name">Lowercase letters</span>
-              </label>
-              <label>
-                <input type="checkbox" id="numbers" checked />
-                <span></span>
-                <span class="option__name">Numbers</span>
-              </label>
-              <label>
-                <input type="checkbox" id="symbols" checked />
-                <span></span>
-                <span class="option__name">Symbols</span>
-              </label>
+              <div class="generator__options">
+                <label>
+                  <input type="checkbox" id="uppercase" checked />
+                  <span></span>
+                  <span class="option__name">Uppercase letters</span>
+                </label>
+                <label>
+                  <input type="checkbox" id="lowercase" checked />
+                  <span></span>
+                  <span class="option__name">Lowercase letters</span>
+                </label>
+                <label>
+                  <input type="checkbox" id="numbers" checked />
+                  <span></span>
+                  <span class="option__name">Numbers</span>
+                </label>
+                <label>
+                  <input type="checkbox" id="symbols" checked />
+                  <span></span>
+                  <span class="option__name">Symbols</span>
+                </label>
+              </div>
             </div>
           </div>
           <div class="generator__history">
             <h2>Password history</h2>
-            <div class="generator__history-body"></div>
+            <div class="generator__history-body">
+              <div class="history__wrapper"></div>
+            </div>
             <div class="generator__history-btn">
-              <button type="button">Clear history</button>
+              <button class="delete__history" type="button">
+                Clear history
+              </button>
             </div>
           </div>
         </div>
