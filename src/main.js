@@ -9,6 +9,10 @@ const lengthSlider = document.getElementById("length__slider");
 const lengthValue = document.querySelector(".password__slider-value");
 const historyWrapper = document.querySelector(".history__wrapper");
 
+let click = new Audio("./audio/click.wav");
+let deleteSound = new Audio("./audio/delete.mp3");
+let generateSound = new Audio("./audio/gen.mp3");
+
 const options = {
   lowercase: {
     checkbox: document.getElementById("lowercase"),
@@ -27,6 +31,13 @@ const options = {
     chars: "0123456789",
   },
 };
+
+Object.values(options).forEach((option) => {
+  option.checkbox.addEventListener("change", () => {
+    let clickSound = click.cloneNode(true);
+    clickSound.play();
+  });
+});
 
 copyBtn.addEventListener("click", () => {
   if (passwordField.value) {
@@ -72,7 +83,7 @@ lengthSlider.addEventListener("input", updateLengthSlider);
 
 const createHistoryElement = (password, dateTime) => {
   const historyItem = document.createElement("div");
-  historyItem.classList.add("history__item");
+  historyItem.classList.add("history__item", "fade-in");
   const historyItemWrapper = document.createElement("div");
   historyItemWrapper.classList.add("history__item-wrapper");
   const pass = document.createElement("p");
@@ -130,18 +141,33 @@ const restoreHistory = () => {
 };
 
 const clearHistory = () => {
-  Array.from(historyWrapper.children).forEach((child) =>
-    historyWrapper.removeChild(child)
-  );
+  let deleteSoundInstance = deleteSound.cloneNode(true);
+  deleteSoundInstance.play();
 
-  localStorage.removeItem("passwordHistory");
+  const historyItems = Array.from(historyWrapper.children);
+
+  historyItems.forEach((child, index) => {
+    child.classList.add("fade-out"); // Добавляем анимацию исчезновения
+
+    setTimeout(() => {
+      historyWrapper.removeChild(child);
+      if (index === historyItems.length - 1) {
+        localStorage.removeItem("passwordHistory");
+      }
+    }, 300); // Даем время на проигрывание анимации перед удалением
+  });
 };
 
 clearBtn.addEventListener("click", clearHistory);
+document.addEventListener("DOMContentLoaded", () => {
+  restoreHistory();
+});
 
-document.addEventListener("DOMContentLoaded", restoreHistory);
+const diffSection = document.querySelectorAll(".difficulty__section");
 
 generateBtn.addEventListener("click", () => {
+  let generateSoundInstance = generateSound.cloneNode(true);
+  generateSoundInstance.play();
   savePasswordOptions();
   addToHistory();
   const length = parseInt(lengthSlider.value, 10);
@@ -161,8 +187,45 @@ generateBtn.addEventListener("click", () => {
     () => selectedChars[Math.floor(Math.random() * selectedChars.length)]
   ).join("");
 
+  let strength = passwordStrength(passwordField.value);
+
+  diffSection.forEach((section) => {
+    section.classList.remove("strong");
+  });
+
+  if (strength >= 1) {
+    diffSection[3].classList.add("strong");
+  }
+  if (strength >= 2) {
+    diffSection[2].classList.add("strong");
+  }
+  if (strength >= 3) {
+    diffSection[1].classList.add("strong");
+  }
+  if (strength >= 4) {
+    diffSection[0].classList.add("strong");
+  }
+
   localStorage.setItem("passwordField", JSON.stringify(passwordField.value));
 });
+
+const passwordStrength = (password) => {
+  const lengthWeight = 0.2;
+  const uppercaseWeight = 0.5;
+  const lowercaseWeight = 0.5;
+  const numberWeight = 0.7;
+  const symbolWeight = 1;
+  let strength = 0;
+
+  strength += password.length * lengthWeight;
+
+  if (password.match(/[A-Z]/)) strength += uppercaseWeight;
+  if (password.match(/[a-z]/)) strength += lowercaseWeight;
+  if (password.match(/[0-9]/)) strength += numberWeight;
+  if (password.match(/[^A-Za-z0-9]/)) strength += symbolWeight;
+
+  return strength;
+};
 
 restorePasswordOptions();
 updateLengthSlider();

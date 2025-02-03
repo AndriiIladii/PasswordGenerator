@@ -139,6 +139,7 @@ h2 {
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
+  position: relative;
 }
 
 .generator__row {
@@ -182,11 +183,16 @@ h2 {
   row-gap: 2px;
 }
 
-.generator__difficulty span {
-  display: block;
+.difficulty__section {
   background-color: var(--color-aqua);
+  display: block;
   height: 3px;
   width: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.difficulty__section.strong {
+  background-color: var(--color-red);
 }
 
 .generate__btn {
@@ -200,6 +206,12 @@ h2 {
   background-color: var(--color-yellow);
   padding: 20px 38px 20px 40px;
   border-right: 2px solid var(--color-red);
+  transition: all 0.3s ease;
+}
+
+.generate__btn:hover {
+  background-color: var(--color-red);
+  border-right: 2px solid var(--color-yellow);
 }
 
 .generate__btn::before {
@@ -318,7 +330,7 @@ h2 {
   flex-grow: 1;
 }
 
-.generator__history-btn button {
+.delete__history {
   font-weight: 400;
   letter-spacing: 0.2em;
   color: var(--color-yellow);
